@@ -4,42 +4,50 @@
 <meta charset="UTF-8">
 <title>Trợ lý tuyển sinh CAND</title>
 <style>
-body {font-family: Arial; margin:0; background:#f5f5f5;}
+body{
+  font-family: Arial, sans-serif;
+  margin:0;
+  background:#f5f5f5;
+}
 
-.header {
+.header{
   background:#c40000;
   color:white;
-  padding:15px;
+  padding:14px 10px;
   text-align:center;
   font-weight:bold;
   font-size:18px;
 }
 
-.chat {
-  padding:15px;
+.chat{
+  padding:16px;
 }
 
-.bot {
+.bot{
   background:white;
-  padding:12px;
-  border-radius:10px;
+  padding:12px 14px;
+  border-radius:12px;
   margin-bottom:10px;
-  max-width:70%;
+  max-width:72%;
+  line-height:1.6;
+  box-shadow:0 1px 4px rgba(0,0,0,0.08);
 }
 
-.user {
+.user{
   text-align:right;
-  margin:10px;
+  margin:10px 0;
+  color:#333;
+  font-weight:500;
 }
 
-.btns {
-  padding:10px;
+.btns{
+  padding:6px 10px 14px;
   text-align:center;
 }
 
-.btns button {
+.btns button{
   margin:5px;
-  padding:10px;
+  padding:10px 14px;
   border:none;
   border-radius:10px;
   background:#ffe6e6;
@@ -47,29 +55,29 @@ body {font-family: Arial; margin:0; background:#f5f5f5;}
   cursor:pointer;
 }
 
-.input {
+.input{
   display:flex;
   padding:10px;
+  gap:10px;
 }
 
-input {
+input{
   flex:1;
-  padding:10px;
+  padding:12px;
   border-radius:10px;
   border:1px solid #ccc;
 }
 
-button.send {
-  margin-left:10px;
-  padding:10px 15px;
+button.send{
+  padding:10px 16px;
   background:red;
   color:white;
   border:none;
   border-radius:10px;
+  cursor:pointer;
 }
 </style>
 </head>
-
 <body>
 
 <div class="header">
@@ -78,23 +86,25 @@ Công an xã Trà Đốc
 </div>
 
 <div class="chat" id="chat">
-<div class="bot">
-Xin chào! Tôi là trợ lý tuyển sinh CAND.<br>
-👉 Hãy chọn nội dung hoặc nhập câu hỏi bên dưới.
-</div>
+  <div class="bot">
+    Xin chào! Tôi là trợ lý tuyển sinh CAND.<br>
+    👉 Hãy chọn nội dung hoặc nhập câu hỏi bên dưới.
+  </div>
 </div>
 
 <div class="btns">
-<button onclick="reply('dh')">Đại học</button>
-<button onclick="reply('vb2')">VB2CA</button>
-<button onclick="reply('tc')">Trung cấp</button>
-<button onclick="reply('sk')">Sức khỏe</button>
-<button onclick="reply('time')">Thời gian</button>
+  <button onclick="reply('dh')">Đại học</button>
+  <button onclick="reply('vb2')">VB2CA</button>
+  <button onclick="reply('tc')">Trung cấp</button>
+  <button onclick="reply('sk')">Sức khỏe</button>
+  <button onclick="reply('time')">Thời gian</button>
+  <button onclick="reply('hoso')">Hồ sơ</button>
+  <button onclick="reply('contact')">Liên hệ</button>
 </div>
 
 <div class="input">
-<input id="txt" placeholder="Nhập câu hỏi...">
-<button class="send" onclick="send()">Gửi</button>
+  <input id="txt" placeholder="Nhập câu hỏi...">
+  <button class="send" onclick="send()">Gửi</button>
 </div>
 
 <script>
@@ -106,47 +116,62 @@ function add(msg, type){
 }
 
 function reply(type){
-  if(type=="dh"){
-    add("🎓 <b>Tuyển sinh Đại học CAND</b><br>\
-- Đối tượng: học sinh tốt nghiệp THPT hoặc tương đương<br>\
-- Phải tham gia sơ tuyển tại Công an cấp xã<br>\
-- Điều kiện theo quy định của Bộ Công an<br>\
-👉 Liên hệ Công an xã Trà Đốc để được hướng dẫn.", "bot");
+  if(type==="dh"){
+    add(`🎓 <b>Tuyển sinh Đại học CAND</b><br>
+- Đối tượng: học sinh tốt nghiệp THPT hoặc tương đương<br>
+- Phải tham gia sơ tuyển tại Công an cấp xã<br>
+- Điều kiện theo quy định của Bộ Công an<br>
+👉 Liên hệ Công an xã Trà Đốc để được hướng dẫn.`, "bot");
   }
 
-  if(type=="vb2"){
-    add("📘 <b>Văn bằng 2 CAND (VB2CA)</b><br>\
-- Dành cho người đã tốt nghiệp đại học<br>\
-- Đảm bảo tiêu chuẩn chính trị, sức khỏe<br>\
-👉 Công an xã Trà Đốc hỗ trợ hồ sơ.", "bot");
+  if(type==="vb2"){
+    add(`📘 <b>Văn bằng 2 CAND (VB2CA)</b><br>
+- Dành cho người đã tốt nghiệp đại học<br>
+- Bảo đảm tiêu chuẩn chính trị, sức khỏe<br>
+👉 Công an xã Trà Đốc hỗ trợ hồ sơ.`, "bot");
   }
 
-  if(type=="tc"){
-    add("🏫 <b>Trung cấp CAND</b><br>\
-- Theo chỉ tiêu phân bổ<br>\
-- Phải qua sơ tuyển<br>\
-👉 Liên hệ Công an xã để biết chi tiết.", "bot");
+  if(type==="tc"){
+    add(`🏫 <b>Trung cấp CAND</b><br>
+- Theo chỉ tiêu phân bổ<br>
+- Phải qua sơ tuyển<br>
+👉 Liên hệ Công an xã để biết chi tiết.`, "bot");
   }
 
-  if(type=="sk"){
-    add("💪 <b>Tiêu chuẩn sức khỏe</b><br>\
-- Nam: ≥ 1m64<br>\
-- Nữ: ≥ 1m58<br>\
-- BMI: 18.5 đến dưới 30<br>\
-- Không xăm phản cảm<br>\
-👉 Kiểm tra cụ thể tại sơ tuyển.", "bot");
+  if(type==="sk"){
+    add(`💪 <b>Tiêu chuẩn sức khỏe</b><br>
+- Nam: từ 1m64 trở lên<br>
+- Nữ: từ 1m58 trở lên<br>
+- BMI: từ 18.5 đến dưới 30<br>
+- Không xăm phản cảm<br>
+👉 Kiểm tra cụ thể tại sơ tuyển.`, "bot");
   }
 
-  if(type=="time"){
-    add("📅 <b>Thời gian sơ tuyển</b><br>\
-- 19/3 đến 02/4/2026<br>\
-📍 Công an xã Trà Đốc<br>\
-📞 Đ/c Lê Văn Trí: 0387 913 777", "bot");
+  if(type==="time"){
+    add(`📅 <b>Thời gian sơ tuyển</b><br>
+- Từ 19/3/2026 đến 02/4/2026<br>
+📍 Công an xã Trà Đốc<br>
+📞 Đ/c Lê Văn Trí: 0387 913 777`, "bot");
+  }
+
+  if(type==="hoso"){
+    add(`📂 <b>Hồ sơ sơ tuyển</b><br>
+- CCCD<br>
+- Học bạ<br>
+- Sơ yếu lý lịch<br>
+👉 Đến Công an xã Trà Đốc để được hướng dẫn cụ thể.`, "bot");
+  }
+
+  if(type==="contact"){
+    add(`📞 <b>Liên hệ tuyển sinh</b><br>
+Đ/c Lê Văn Trí - 0387 913 777<br>
+📍 Công an xã Trà Đốc`, "bot");
   }
 }
+
 function send(){
   let txt = document.getElementById("txt").value.trim().toLowerCase();
-  if(txt==="") return;
+  if(txt === "") return;
 
   add(txt, "user");
 
@@ -161,23 +186,14 @@ function send(){
   } else if(txt.includes("thời gian") || txt.includes("thoi gian") || txt.includes("khi nào") || txt.includes("khi nao") || txt.includes("địa điểm") || txt.includes("dia diem")){
     reply("time");
   } else if(txt.includes("hồ sơ") || txt.includes("ho so") || txt.includes("giấy tờ") || txt.includes("giay to")){
-    add("📂 <b>Hồ sơ sơ tuyển</b><br>\
-- CCCD<br>\
-- Học bạ<br>\
-- Sơ yếu lý lịch<br>\
-👉 Đến Công an xã Trà Đốc để được hướng dẫn cụ thể.", "bot");
+    reply("hoso");
   } else if(txt.includes("liên hệ") || txt.includes("lien he") || txt.includes("số điện thoại") || txt.includes("so dien thoai")){
-    add("📞 <b>Liên hệ tuyển sinh</b><br>\
-Đ/c Lê Văn Trí - 0387 913 777<br>\
-📍 Công an xã Trà Đốc", "bot");
+    reply("contact");
   } else {
-    add("👉 Bạn hãy hỏi về: đại học, VB2CA, trung cấp, sức khỏe, thời gian, hồ sơ, liên hệ.", "bot");
+    add(`👉 Bạn có thể hỏi về: đại học, VB2CA, trung cấp, sức khỏe, thời gian, hồ sơ, liên hệ.`, "bot");
   }
 
-  document.getElementById("txt").value="";
-}
-
-  document.getElementById("txt").value="";
+  document.getElementById("txt").value = "";
 }
 </script>
 
