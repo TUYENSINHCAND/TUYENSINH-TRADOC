@@ -107,35 +107,75 @@ function add(msg, type){
 
 function reply(type){
   if(type=="dh"){
-    add("🎓 Tuyển sinh Đại học CAND theo quy định của Bộ Công an.", "bot");
+    add("🎓 <b>Tuyển sinh Đại học CAND</b><br>\
+- Đối tượng: học sinh tốt nghiệp THPT hoặc tương đương<br>\
+- Phải tham gia sơ tuyển tại Công an cấp xã<br>\
+- Điều kiện theo quy định của Bộ Công an<br>\
+👉 Liên hệ Công an xã Trà Đốc để được hướng dẫn.", "bot");
   }
+
   if(type=="vb2"){
-    add("📘 VB2CA dành cho người đã có bằng đại học.", "bot");
+    add("📘 <b>Văn bằng 2 CAND (VB2CA)</b><br>\
+- Dành cho người đã tốt nghiệp đại học<br>\
+- Đảm bảo tiêu chuẩn chính trị, sức khỏe<br>\
+👉 Công an xã Trà Đốc hỗ trợ hồ sơ.", "bot");
   }
+
   if(type=="tc"){
-    add("🏫 Trung cấp Công an theo chỉ tiêu địa phương.", "bot");
+    add("🏫 <b>Trung cấp CAND</b><br>\
+- Theo chỉ tiêu phân bổ<br>\
+- Phải qua sơ tuyển<br>\
+👉 Liên hệ Công an xã để biết chi tiết.", "bot");
   }
+
   if(type=="sk"){
-    add("💪 Chiều cao: Nam 1m64+, Nữ 1m58+<br>BMI chuẩn, không xăm.", "bot");
+    add("💪 <b>Tiêu chuẩn sức khỏe</b><br>\
+- Nam: ≥ 1m64<br>\
+- Nữ: ≥ 1m58<br>\
+- BMI: 18.5 đến dưới 30<br>\
+- Không xăm phản cảm<br>\
+👉 Kiểm tra cụ thể tại sơ tuyển.", "bot");
   }
+
   if(type=="time"){
-    add("📅 19/3 - 02/4 tại Công an xã Trà Đốc", "bot");
+    add("📅 <b>Thời gian sơ tuyển</b><br>\
+- 19/3 đến 02/4/2026<br>\
+📍 Công an xã Trà Đốc<br>\
+📞 Đ/c Lê Văn Trí: 0387 913 777", "bot");
   }
 }
-
 function send(){
-  let txt = document.getElementById("txt").value;
+  let txt = document.getElementById("txt").value.trim().toLowerCase();
+  if(txt==="") return;
+
   add(txt, "user");
 
-  if(txt.includes("cao")){
+  if(txt.includes("đại học") || txt.includes("dai hoc")){
+    reply("dh");
+  } else if(txt.includes("vb2") || txt.includes("văn bằng 2") || txt.includes("van bang 2")){
+    reply("vb2");
+  } else if(txt.includes("trung cấp") || txt.includes("trung cap")){
+    reply("tc");
+  } else if(txt.includes("sức khỏe") || txt.includes("suc khoe") || txt.includes("chiều cao") || txt.includes("cao") || txt.includes("bmi")){
     reply("sk");
-  } else if(txt.includes("hồ sơ")){
-    add("📂 Học bạ, CCCD, sơ yếu lý lịch", "bot");
-  } else if(txt.includes("khi")){
+  } else if(txt.includes("thời gian") || txt.includes("thoi gian") || txt.includes("khi nào") || txt.includes("khi nao") || txt.includes("địa điểm") || txt.includes("dia diem")){
     reply("time");
+  } else if(txt.includes("hồ sơ") || txt.includes("ho so") || txt.includes("giấy tờ") || txt.includes("giay to")){
+    add("📂 <b>Hồ sơ sơ tuyển</b><br>\
+- CCCD<br>\
+- Học bạ<br>\
+- Sơ yếu lý lịch<br>\
+👉 Đến Công an xã Trà Đốc để được hướng dẫn cụ thể.", "bot");
+  } else if(txt.includes("liên hệ") || txt.includes("lien he") || txt.includes("số điện thoại") || txt.includes("so dien thoai")){
+    add("📞 <b>Liên hệ tuyển sinh</b><br>\
+Đ/c Lê Văn Trí - 0387 913 777<br>\
+📍 Công an xã Trà Đốc", "bot");
   } else {
-    add("👉 Liên hệ Công an xã Trà Đốc để được hướng dẫn.", "bot");
+    add("👉 Bạn hãy hỏi về: đại học, VB2CA, trung cấp, sức khỏe, thời gian, hồ sơ, liên hệ.", "bot");
   }
+
+  document.getElementById("txt").value="";
+}
 
   document.getElementById("txt").value="";
 }
