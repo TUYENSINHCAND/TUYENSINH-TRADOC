@@ -1,358 +1,433 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trợ lý tuyển sinh CAND 2026 - Công an xã Trà Đốc</title>
-<style>
-*{
-  box-sizing:border-box;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trợ lý tuyển sinh CAND 2026 - Công an xã Trà Đốc</title>
+  <style>
+    *{
+      box-sizing:border-box;
+    }
 
-body{
-  margin:0;
-  font-family: Arial, sans-serif;
-  background:#eef2f5;
-  color:#1f2d3d;
-}
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:#eef2f5;
+      color:#1f2d3d;
+    }
 
-.app{
-  max-width:430px;
-  margin:0 auto;
-  min-height:100vh;
-  background:#f7f8fa;
-  display:flex;
-  flex-direction:column;
-  box-shadow:0 0 20px rgba(0,0,0,0.08);
-}
+    .app{
+      max-width:430px;
+      margin:0 auto;
+      min-height:100vh;
+      background:#f7f8fa;
+      display:flex;
+      flex-direction:column;
+      box-shadow:0 0 20px rgba(0,0,0,0.08);
+      position:relative;
+    }
 
-.topbar{
-  background:#c40000;
-  color:#fff;
-  padding:14px 14px 12px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
+    .topbar{
+      background:#c40000;
+      color:#fff;
+      padding:14px 14px 12px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      position:relative;
+    }
 
-.avatar{
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  background:#ffd54f;
-  color:#8b0000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:24px;
-  font-weight:bold;
-  flex-shrink:0;
-}
+    .avatar{
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      background:#ffd54f;
+      color:#8b0000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:24px;
+      font-weight:bold;
+      flex-shrink:0;
+    }
 
-.topbar-text{
-  flex:1;
-}
+    .topbar-text{
+      flex:1;
+    }
 
-.topbar-text .small{
-  font-size:12px;
-  opacity:0.9;
-  margin-bottom:2px;
-}
+    .topbar-text .small{
+      font-size:12px;
+      opacity:0.9;
+      margin-bottom:2px;
+    }
 
-.topbar-text .title{
-  font-size:22px;
-  font-weight:700;
-  line-height:1.2;
-}
+    .topbar-text .title{
+      font-size:22px;
+      font-weight:700;
+      line-height:1.2;
+    }
 
-.topbar-text .sub{
-  font-size:14px;
-  opacity:0.95;
-  margin-top:2px;
-}
+    .topbar-text .sub{
+      font-size:14px;
+      opacity:0.95;
+      margin-top:2px;
+    }
 
-.menu{
-  font-size:22px;
-  opacity:0.9;
-}
+    .menu{
+      font-size:24px;
+      opacity:0.95;
+      cursor:pointer;
+      padding:6px 8px;
+      border-radius:8px;
+      user-select:none;
+    }
 
-.chat-area{
-  flex:1;
-  padding:14px 12px 90px;
-  overflow-y:auto;
-}
+    .menu:hover{
+      background:rgba(255,255,255,0.12);
+    }
 
-.message-row{
-  display:flex;
-  margin-bottom:10px;
-}
+    .menu-box{
+      display:none;
+      position:absolute;
+      top:64px;
+      right:12px;
+      width:210px;
+      background:#fff;
+      border-radius:12px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.18);
+      overflow:hidden;
+      z-index:999;
+    }
 
-.message-row.user{
-  justify-content:flex-end;
-}
+    .menu-item{
+      padding:12px 14px;
+      font-size:15px;
+      cursor:pointer;
+      border-bottom:1px solid #f1f1f1;
+      background:#fff;
+    }
 
-.bubble{
-  max-width:82%;
-  padding:10px 12px;
-  border-radius:16px;
-  line-height:1.55;
-  font-size:15px;
-  word-wrap:break-word;
-  white-space:normal;
-}
+    .menu-item:last-child{
+      border-bottom:none;
+    }
 
-.bot .bubble{
-  background:#ffffff;
-  color:#1f2d3d;
-  border-top-left-radius:6px;
-  box-shadow:0 1px 4px rgba(0,0,0,0.08);
-}
+    .menu-item:hover{
+      background:#fff5f5;
+    }
 
-.user .bubble{
-  background:#e5efff;
-  color:#123;
-  border-top-right-radius:6px;
-  box-shadow:0 1px 4px rgba(0,0,0,0.05);
-}
+    .chat-area{
+      flex:1;
+      padding:14px 12px 90px;
+      overflow-y:auto;
+    }
 
-.quick-wrap{
-  padding:0 12px 12px;
-}
+    .message-row{
+      display:flex;
+      margin-bottom:10px;
+    }
 
-.quick-title{
-  font-size:13px;
-  color:#6b7280;
-  margin-bottom:8px;
-}
+    .message-row.user{
+      justify-content:flex-end;
+    }
 
-.quick-buttons{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
+    .bubble{
+      max-width:82%;
+      padding:10px 12px;
+      border-radius:16px;
+      line-height:1.55;
+      font-size:15px;
+      word-wrap:break-word;
+      white-space:normal;
+    }
 
-.quick-buttons button{
-  border:none;
-  background:#fff;
-  color:#c40000;
-  padding:9px 12px;
-  border-radius:18px;
-  font-size:14px;
-  cursor:pointer;
-  box-shadow:0 1px 4px rgba(0,0,0,0.08);
-}
+    .bot .bubble{
+      background:#ffffff;
+      color:#1f2d3d;
+      border-top-left-radius:6px;
+      box-shadow:0 1px 4px rgba(0,0,0,0.08);
+    }
 
-.quick-buttons button:hover{
-  background:#fff5f5;
-}
+    .user .bubble{
+      background:#e5efff;
+      color:#123;
+      border-top-right-radius:6px;
+      box-shadow:0 1px 4px rgba(0,0,0,0.05);
+    }
 
-.input-bar{
-  position:fixed;
-  left:50%;
-  transform:translateX(-50%);
-  bottom:0;
-  width:100%;
-  max-width:430px;
-  background:#ffffff;
-  border-top:1px solid #e5e7eb;
-  padding:10px 10px 12px;
-  display:flex;
-  gap:8px;
-}
+    .quick-wrap{
+      padding:0 12px 12px;
+    }
 
-.input-bar input{
-  flex:1;
-  border:1px solid #d1d5db;
-  border-radius:22px;
-  padding:12px 14px;
-  font-size:15px;
-  outline:none;
-}
+    .quick-title{
+      font-size:13px;
+      color:#6b7280;
+      margin-bottom:8px;
+    }
 
-.input-bar input:focus{
-  border-color:#c40000;
-}
+    .quick-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
 
-.send-btn{
-  border:none;
-  background:#e40000;
-  color:#fff;
-  min-width:48px;
-  height:48px;
-  border-radius:50%;
-  cursor:pointer;
-  font-size:18px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+    .quick-buttons button{
+      border:none;
+      background:#fff;
+      color:#c40000;
+      padding:9px 12px;
+      border-radius:18px;
+      font-size:14px;
+      cursor:pointer;
+      box-shadow:0 1px 4px rgba(0,0,0,0.08);
+    }
 
-.footer-note{
-  text-align:center;
-  font-size:12px;
-  color:#6b7280;
-  margin-top:8px;
-}
+    .quick-buttons button:hover{
+      background:#fff5f5;
+    }
 
-@media (max-width:480px){
-  .topbar-text .title{
-    font-size:20px;
-  }
-}
-</style>
+    .footer-note{
+      text-align:center;
+      font-size:12px;
+      color:#6b7280;
+      margin-top:8px;
+    }
+
+    .input-bar{
+      position:fixed;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:0;
+      width:100%;
+      max-width:430px;
+      background:#ffffff;
+      border-top:1px solid #e5e7eb;
+      padding:10px 10px 12px;
+      display:flex;
+      gap:8px;
+      z-index:100;
+    }
+
+    .input-bar input{
+      flex:1;
+      border:1px solid #d1d5db;
+      border-radius:22px;
+      padding:12px 14px;
+      font-size:15px;
+      outline:none;
+    }
+
+    .input-bar input:focus{
+      border-color:#c40000;
+    }
+
+    .send-btn{
+      border:none;
+      background:#e40000;
+      color:#fff;
+      min-width:48px;
+      height:48px;
+      border-radius:50%;
+      cursor:pointer;
+      font-size:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    @media (max-width:480px){
+      .topbar-text .title{
+        font-size:20px;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="app">
-  <div class="topbar">
-    <div class="avatar">👮</div>
-    <div class="topbar-text">
-      <div class="small">TRỢ LÝ ẢO</div>
-      <div class="title">Tuyển sinh CAND 2026</div>
-      <div class="sub">Công an xã Trà Đốc</div>
-    </div>
-    <div class="menu">☰</div>
-  </div>
+  <div class="app">
+    <div class="topbar">
+      <div class="avatar">👮</div>
 
-  <div class="chat-area" id="chat">
-    <div class="message-row bot">
-      <div class="bubble">
-        Xin chào! Tôi là Trợ lý ảo tuyển sinh CAND của Công an xã Trà Đốc.<br><br>
-        Bạn có thể tra cứu nhanh về:
-        <br>• Đại học CAND
-        <br>• VB2CA
-        <br>• Trung cấp
-        <br>• Sức khỏe
-        <br>• Thời gian
-        <br>• Hồ sơ
-        <br>• Liên hệ
+      <div class="topbar-text">
+        <div class="small">TRỢ LÝ ẢO</div>
+        <div class="title">Tuyển sinh CAND 2026</div>
+        <div class="sub">Công an xã Trà Đốc</div>
+      </div>
+
+      <div class="menu" onclick="toggleMenu()">☰</div>
+
+      <div id="menuBox" class="menu-box">
+        <div class="menu-item" onclick="menuReply('dh')">🎓 Đại học</div>
+        <div class="menu-item" onclick="menuReply('vb2')">📘 VB2CA</div>
+        <div class="menu-item" onclick="menuReply('tc')">🏫 Trung cấp</div>
+        <div class="menu-item" onclick="menuReply('sk')">💪 Sức khỏe</div>
+        <div class="menu-item" onclick="menuReply('time')">📅 Thời gian</div>
+        <div class="menu-item" onclick="menuReply('hoso')">📂 Hồ sơ</div>
+        <div class="menu-item" onclick="menuReply('contact')">📞 Liên hệ</div>
       </div>
     </div>
-  </div>
 
-  <div class="quick-wrap">
-    <div class="quick-title">Chọn nhanh nội dung:</div>
-    <div class="quick-buttons">
-      <button onclick="reply('dh')">Đại học</button>
-      <button onclick="reply('vb2')">VB2CA</button>
-      <button onclick="reply('tc')">Trung cấp</button>
-      <button onclick="reply('sk')">Sức khỏe</button>
-      <button onclick="reply('time')">Thời gian</button>
-      <button onclick="reply('hoso')">Hồ sơ</button>
-      <button onclick="reply('contact')">Liên hệ</button>
+    <div class="chat-area" id="chat">
+      <div class="message-row bot">
+        <div class="bubble">
+          Xin chào! Tôi là Trợ lý ảo tuyển sinh CAND của Công an xã Trà Đốc.<br><br>
+          Bạn có thể tra cứu nhanh về:
+          <br>• Đại học CAND
+          <br>• VB2CA
+          <br>• Trung cấp
+          <br>• Sức khỏe
+          <br>• Thời gian
+          <br>• Hồ sơ
+          <br>• Liên hệ
+        </div>
+      </div>
     </div>
-    <div class="footer-note">Tra cứu nhanh thông tin tuyển sinh tại Công an xã Trà Đốc</div>
+
+    <div class="quick-wrap">
+      <div class="quick-title">Chọn nhanh nội dung:</div>
+      <div class="quick-buttons">
+        <button onclick="reply('dh')">Đại học</button>
+        <button onclick="reply('vb2')">VB2CA</button>
+        <button onclick="reply('tc')">Trung cấp</button>
+        <button onclick="reply('sk')">Sức khỏe</button>
+        <button onclick="reply('time')">Thời gian</button>
+        <button onclick="reply('hoso')">Hồ sơ</button>
+        <button onclick="reply('contact')">Liên hệ</button>
+      </div>
+      <div class="footer-note">Tra cứu nhanh thông tin tuyển sinh tại Công an xã Trà Đốc</div>
+    </div>
   </div>
-</div>
 
-<div class="input-bar">
-  <input id="txt" placeholder="Nhập nội dung cần tra cứu..." onkeydown="if(event.key==='Enter'){send();}">
-  <button class="send-btn" onclick="send()">➤</button>
-</div>
+  <div class="input-bar">
+    <input id="txt" placeholder="Nhập nội dung cần tra cứu..." onkeydown="if(event.key==='Enter'){send();}">
+    <button class="send-btn" onclick="send()">➤</button>
+  </div>
 
-<script>
-function add(msg, type){
-  const row = document.createElement("div");
-  row.className = "message-row " + type;
+  <script>
+    function add(msg, type){
+      const row = document.createElement("div");
+      row.className = "message-row " + type;
 
-  const bubble = document.createElement("div");
-  bubble.className = "bubble";
-  bubble.innerHTML = msg;
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.innerHTML = msg;
 
-  row.appendChild(bubble);
-  document.getElementById("chat").appendChild(row);
-  scrollToBottom();
-}
+      row.appendChild(bubble);
+      document.getElementById("chat").appendChild(row);
+      scrollToBottom();
+    }
 
-function scrollToBottom(){
-  const chat = document.getElementById("chat");
-  chat.scrollTop = chat.scrollHeight;
-  window.scrollTo(0, document.body.scrollHeight);
-}
+    function scrollToBottom(){
+      const chat = document.getElementById("chat");
+      chat.scrollTop = chat.scrollHeight;
+      window.scrollTo(0, document.body.scrollHeight);
+    }
 
-function reply(type){
-  if(type === "dh"){
-    add(`🎓 <b>Tuyển sinh Đại học CAND</b><br>
+    function toggleMenu(){
+      const box = document.getElementById("menuBox");
+      if(box.style.display === "block"){
+        box.style.display = "none";
+      } else {
+        box.style.display = "block";
+      }
+    }
+
+    function menuReply(type){
+      toggleMenu();
+      reply(type);
+    }
+
+    function reply(type){
+      if(type === "dh"){
+        add(`🎓 <b>Tuyển sinh Đại học CAND</b><br>
 - Đối tượng: học sinh tốt nghiệp THPT hoặc tương đương<br>
 - Thí sinh thực hiện sơ tuyển tại Công an cấp xã theo quy định<br>
 - Điều kiện cụ thể về độ tuổi, học lực, hạnh kiểm, sức khỏe thực hiện theo hướng dẫn tuyển sinh từng năm<br>
 👉 Liên hệ trực tiếp Công an xã Trà Đốc để được hướng dẫn chi tiết.`, "bot");
-  }
+      }
 
-  if(type === "vb2"){
-    add(`📘 <b>Văn bằng 2 CAND (VB2CA)</b><br>
+      if(type === "vb2"){
+        add(`📘 <b>Văn bằng 2 CAND (VB2CA)</b><br>
 - Dành cho người đã tốt nghiệp đại học<br>
 - Bảo đảm tiêu chuẩn chính trị, phẩm chất đạo đức và sức khỏe<br>
 - Thực hiện theo thông báo tuyển sinh hằng năm của Bộ Công an<br>
 👉 Công an xã Trà Đốc hỗ trợ hướng dẫn hồ sơ.`, "bot");
-  }
+      }
 
-  if(type === "tc"){
-    add(`🏫 <b>Tuyển sinh Trung cấp CAND</b><br>
+      if(type === "tc"){
+        add(`🏫 <b>Tuyển sinh Trung cấp CAND</b><br>
 - Thực hiện theo chỉ tiêu và hướng dẫn của cấp trên<br>
 - Thí sinh phải qua sơ tuyển, bảo đảm điều kiện chính trị, đạo đức, học lực và sức khỏe<br>
 👉 Liên hệ Công an xã Trà Đốc để được hướng dẫn cụ thể.`, "bot");
-  }
+      }
 
-  if(type === "sk"){
-    add(`💪 <b>Tiêu chuẩn sức khỏe cơ bản</b><br>
+      if(type === "sk"){
+        add(`💪 <b>Tiêu chuẩn sức khỏe cơ bản</b><br>
 - Nam: từ 1m64 đến 1m95<br>
 - Nữ: từ 1m58 đến 1m80<br>
 - BMI: từ 18.5 đến dưới 30<br>
 - Không xăm trổ phản cảm, lộ rõ<br>
 👉 Trường hợp cụ thể sẽ được kiểm tra tại sơ tuyển.`, "bot");
-  }
+      }
 
-  if(type === "time"){
-    add(`📅 <b>Thời gian sơ tuyển</b><br>
+      if(type === "time"){
+        add(`📅 <b>Thời gian sơ tuyển</b><br>
 - Từ ngày 19/3/2026 đến hết ngày 02/4/2026<br>
 📍 <b>Địa điểm</b>: Công an xã Trà Đốc<br>
 📞 <b>Cán bộ tuyển sinh</b>: Đ/c Thượng úy Lê Văn Trí - 0387 913 777`, "bot");
-  }
+      }
 
-  if(type === "hoso"){
-    add(`📂 <b>Hồ sơ sơ tuyển</b><br>
+      if(type === "hoso"){
+        add(`📂 <b>Hồ sơ sơ tuyển</b><br>
 - CCCD<br>
 - Học bạ<br>
 - Sơ yếu lý lịch<br>
 - Các giấy tờ liên quan khác theo hướng dẫn sơ tuyển<br>
 👉 Thí sinh đến Công an xã Trà Đốc để được hướng dẫn cụ thể.`, "bot");
-  }
+      }
 
-  if(type === "contact"){
-    add(`📞 <b>Liên hệ tuyển sinh</b><br>
+      if(type === "contact"){
+        add(`📞 <b>Liên hệ tuyển sinh</b><br>
 Đ/c Thượng úy Lê Văn Trí<br>
 SĐT: 0387 913 777<br>
 📍 Công an xã Trà Đốc`, "bot");
-  }
-}
+      }
+    }
 
-function send(){
-  let raw = document.getElementById("txt").value;
-  let txt = raw.trim().toLowerCase();
-  if(txt === "") return;
+    function send(){
+      let raw = document.getElementById("txt").value;
+      let txt = raw.trim().toLowerCase();
+      if(txt === "") return;
 
-  add(raw, "user");
+      add(raw, "user");
 
-  if(txt.includes("đại học") || txt.includes("dai hoc")){
-    reply("dh");
-  } else if(txt.includes("vb2") || txt.includes("văn bằng 2") || txt.includes("van bang 2")){
-    reply("vb2");
-  } else if(txt.includes("trung cấp") || txt.includes("trung cap")){
-    reply("tc");
-  } else if(txt.includes("sức khỏe") || txt.includes("suc khoe") || txt.includes("chiều cao") || txt.includes("cao") || txt.includes("bmi")){
-    reply("sk");
-  } else if(txt.includes("thời gian") || txt.includes("thoi gian") || txt.includes("khi nào") || txt.includes("khi nao") || txt.includes("địa điểm") || txt.includes("dia diem")){
-    reply("time");
-  } else if(txt.includes("hồ sơ") || txt.includes("ho so") || txt.includes("giấy tờ") || txt.includes("giay to")){
-    reply("hoso");
-  } else if(txt.includes("liên hệ") || txt.includes("lien he") || txt.includes("số điện thoại") || txt.includes("so dien thoai")){
-    reply("contact");
-  } else {
-    add(`👉 Tôi chưa nhận diện rõ câu hỏi. Bạn có thể hỏi hoặc bấm chọn các mục: Đại học, VB2CA, Trung cấp, Sức khỏe, Thời gian, Hồ sơ, Liên hệ.`, "bot");
-  }
+      if(txt.includes("đại học") || txt.includes("dai hoc")){
+        reply("dh");
+      } else if(txt.includes("vb2") || txt.includes("văn bằng 2") || txt.includes("van bang 2")){
+        reply("vb2");
+      } else if(txt.includes("trung cấp") || txt.includes("trung cap")){
+        reply("tc");
+      } else if(txt.includes("sức khỏe") || txt.includes("suc khoe") || txt.includes("chiều cao") || txt.includes("cao") || txt.includes("bmi")){
+        reply("sk");
+      } else if(txt.includes("thời gian") || txt.includes("thoi gian") || txt.includes("khi nào") || txt.includes("khi nao") || txt.includes("địa điểm") || txt.includes("dia diem")){
+        reply("time");
+      } else if(txt.includes("hồ sơ") || txt.includes("ho so") || txt.includes("giấy tờ") || txt.includes("giay to")){
+        reply("hoso");
+      } else if(txt.includes("liên hệ") || txt.includes("lien he") || txt.includes("số điện thoại") || txt.includes("so dien thoai")){
+        reply("contact");
+      } else {
+        add(`👉 Tôi chưa nhận diện rõ câu hỏi. Bạn có thể hỏi hoặc bấm chọn các mục: Đại học, VB2CA, Trung cấp, Sức khỏe, Thời gian, Hồ sơ, Liên hệ.`, "bot");
+      }
 
-  document.getElementById("txt").value = "";
-}
-</script>
+      document.getElementById("txt").value = "";
+    }
+
+    document.addEventListener("click", function(e){
+      const menu = document.getElementById("menuBox");
+      const button = document.querySelector(".menu");
+
+      if(!menu.contains(e.target) && !button.contains(e.target)){
+        menu.style.display = "none";
+      }
+    });
+  </script>
 </body>
 </html>
