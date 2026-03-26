@@ -2,16 +2,71 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Tuyển sinh CAND Trà Đốc</title>
+<title>Trợ lý tuyển sinh CAND</title>
 <style>
-body {font-family: Arial; margin:0; background:#f2f2f2;}
-.header {background:#c40000; color:white; padding:15px; text-align:center;}
-.chat {padding:15px;}
-.bot {background:white; padding:10px; border-radius:10px; margin:10px 0;}
-.user {text-align:right;}
-.input {display:flex; padding:10px;}
-input {flex:1; padding:10px;}
-button {padding:10px; background:red; color:white; border:none;}
+body {font-family: Arial; margin:0; background:#f5f5f5;}
+
+.header {
+  background:#c40000;
+  color:white;
+  padding:15px;
+  text-align:center;
+  font-weight:bold;
+  font-size:18px;
+}
+
+.chat {
+  padding:15px;
+}
+
+.bot {
+  background:white;
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:10px;
+  max-width:70%;
+}
+
+.user {
+  text-align:right;
+  margin:10px;
+}
+
+.btns {
+  padding:10px;
+  text-align:center;
+}
+
+.btns button {
+  margin:5px;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  background:#ffe6e6;
+  color:red;
+  cursor:pointer;
+}
+
+.input {
+  display:flex;
+  padding:10px;
+}
+
+input {
+  flex:1;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+button.send {
+  margin-left:10px;
+  padding:10px 15px;
+  background:red;
+  color:white;
+  border:none;
+  border-radius:10px;
+}
 </style>
 </head>
 
@@ -22,35 +77,67 @@ button {padding:10px; background:red; color:white; border:none;}
 Công an xã Trà Đốc
 </div>
 
-<div id="chat" class="chat">
+<div class="chat" id="chat">
 <div class="bot">
-Xin chào! Hãy hỏi tôi về tuyển sinh CAND.
+Xin chào! Tôi là trợ lý tuyển sinh CAND.<br>
+👉 Hãy chọn nội dung hoặc nhập câu hỏi bên dưới.
 </div>
+</div>
+
+<div class="btns">
+<button onclick="reply('dh')">Đại học</button>
+<button onclick="reply('vb2')">VB2CA</button>
+<button onclick="reply('tc')">Trung cấp</button>
+<button onclick="reply('sk')">Sức khỏe</button>
+<button onclick="reply('time')">Thời gian</button>
 </div>
 
 <div class="input">
 <input id="txt" placeholder="Nhập câu hỏi...">
-<button onclick="send()">Gửi</button>
+<button class="send" onclick="send()">Gửi</button>
 </div>
 
 <script>
+function add(msg, type){
+  let div = document.createElement("div");
+  div.className = type;
+  div.innerHTML = msg;
+  document.getElementById("chat").appendChild(div);
+}
+
+function reply(type){
+  if(type=="dh"){
+    add("🎓 Tuyển sinh Đại học CAND theo quy định của Bộ Công an.", "bot");
+  }
+  if(type=="vb2"){
+    add("📘 VB2CA dành cho người đã có bằng đại học.", "bot");
+  }
+  if(type=="tc"){
+    add("🏫 Trung cấp Công an theo chỉ tiêu địa phương.", "bot");
+  }
+  if(type=="sk"){
+    add("💪 Chiều cao: Nam 1m64+, Nữ 1m58+<br>BMI chuẩn, không xăm.", "bot");
+  }
+  if(type=="time"){
+    add("📅 19/3 - 02/4 tại Công an xã Trà Đốc", "bot");
+  }
+}
+
 function send(){
- let t = document.getElementById("txt").value;
- let c = document.getElementById("chat");
+  let txt = document.getElementById("txt").value;
+  add(txt, "user");
 
- c.innerHTML += "<div class='user'>"+t+"</div>";
+  if(txt.includes("cao")){
+    reply("sk");
+  } else if(txt.includes("hồ sơ")){
+    add("📂 Học bạ, CCCD, sơ yếu lý lịch", "bot");
+  } else if(txt.includes("khi")){
+    reply("time");
+  } else {
+    add("👉 Liên hệ Công an xã Trà Đốc để được hướng dẫn.", "bot");
+  }
 
- if(t.includes("cao")){
-   c.innerHTML += "<div class='bot'>📏 Nam 1m64+, Nữ 1m58+</div>";
- } else if(t.includes("hồ sơ")){
-   c.innerHTML += "<div class='bot'>📂 Học bạ, CCCD, sơ yếu lý lịch</div>";
- } else if(t.includes("khi") || t.includes("thời gian")){
-   c.innerHTML += "<div class='bot'>📅 19/3 - 02/4 tại Công an xã Trà Đốc</div>";
- } else {
-   c.innerHTML += "<div class='bot'>👉 Liên hệ Công an xã Trà Đốc để biết thêm.</div>";
- }
-
- document.getElementById("txt").value="";
+  document.getElementById("txt").value="";
 }
 </script>
 
